@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="shortcut icon" href="#">
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>NAME</th>
+        <th>COUNT</th>
+        <th>COST</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="good : ${goods}">
+        <td th:text="${good.name}"></td>
+        <td th:text="${good.count}"></td>
+        <td th:text="${good.cost}"></td>
+        <td>
+            <form th:action="@{/toBuy}" th:method="post">
+                <!--从cookie中获取用户使用的username-->
+                <input th:each="cookie : ${#request.getCookies()}"
+                       th:if="${cookie.getName().equals('username')}"
+                       th:type="hidden" name="username" th:value="${cookie.getValue()}">
+                <input th:type="hidden" name="gid" th:value="${good.id}">
+                <input th:type="hidden" name="cost" th:value="${good.cost}">
+                <button class="btn_buy" type="submit" th:if="${good.count} gt 0">购买</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

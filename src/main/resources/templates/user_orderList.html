@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="shortcut icon" href="#">
+</head>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>TIME</th>
+        <th>USERNAME</th>
+        <th>GID</th>
+        <th>PRICE</th>
+        <th>STATUS</th>
+    </tr>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.time}"></td>
+        <td th:text="${order.username}"></td>
+        <td th:text="${order.gid}"></td>
+        <td th:text="${order.price}"></td>
+        <td th:text="${order.status} == 'doing'?'正在处理':'订单已完成'"></td>
+    </tr>
+</table>
+<p style="color: red" th:text="${message}" th:if="${#strings.isEmpty(message)}"></p>
+</body>
+</html>

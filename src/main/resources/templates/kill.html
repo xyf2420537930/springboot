@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="shortcut icon" href="#">
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>NAME</th>
+        <th>COUNT</th>
+        <th>PRICE</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="good : ${kill}">
+        <td id="name" th:text="${good.name}"></td>
+        <td id="count" th:text="${good.count}"></td>
+        <td id="cost" th:text="${good.cost}"></td>
+        <td>
+            <form th:action="@{/killing}" th:method="post">
+                <input th:each="cookie : ${#request.getCookies()}" th:if="${cookie.getName().equals('username')}" th:type="hidden" name="username" th:value="${cookie.getValue()}">
+                <input th:type="hidden" name="gid" th:value="${good.id}">
+                <input th:type="hidden" name="cost" th:value="${good.cost}">
+                <button id="buy" class="btn_buy" th:type="submit" th:if="${good.count} gt 0" >点击秒杀！</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<!--<script src="js/jquery.js"></script>-->
+<!--<script src="js/kill.js"></script>-->
+</body>
+</html>

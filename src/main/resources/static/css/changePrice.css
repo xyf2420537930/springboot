@@ -1,0 +1,27 @@
+.changePrice, .insert{
+    size: auto;
+    display: none;
+    z-index: 2;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 35%;
+    height: 35%;
+    border: 5px solid black;
+    background-color: white;
+    overflow: auto;
+}
+
+.price{
+    width: 80%;
+}
+
+.blank{
+    display: none;
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+

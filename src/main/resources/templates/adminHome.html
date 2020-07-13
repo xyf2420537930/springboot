@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="shortcut icon" href="#">
+</head>
+<body>
+<h1 th:each="cookie : ${#request.getCookies()}"
+    th:if="${cookie.getName().equals('username')}"
+    th:text="'欢迎管理员'+${cookie.getValue()}">
+</h1>
+<a href="/logout">退出</a>
+<div>
+    <a th:href="@{/goods}">货物管理</a>
+    <hr>
+    <a th:href="@{/users}">用户管理</a>
+    <hr>
+    <a th:href="@{/orders}">订单管理</a>
+</div>
+</body>
+</html>

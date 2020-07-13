@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>飞哥淘宝网</title>
+    <link rel="shortcut icon" href="#">
+</head>
+
+<body>
+<div>
+    <p style="color: green" th:text="${message}" th:if="${!#strings.isEmpty(message)}"></p>
+</div>
+<div id="main">
+    <form action="/login" method="post">
+        用户名<input type="text" name="username" placeholder="Username">
+        <br>
+        密码<input type="password" name="password" placeholder="Password">
+        <br>
+        <button type="submit">提交</button>
+    </form>
+    <button onclick=register()>注册</button>
+    <button onclick=changePwd()>修改密码</button>
+</div>
+
+<!--注册页面-->
+<div style="display: none" id="register">
+    <form action='/register' method='post'>
+       用户名<input id='check_username' name='username' type='text' onblur='isRepeat()'><span id='check_tip'></span><br>
+       密码<input name='password' type='password'><br>
+       余额<input name="money" type="text"><br>
+       <input id='check_btn' type='hidden'><br>
+    </form>
+</div>
+
+<!--修改密码页面-->
+<div style="display: none" id="changePwd">
+    <form action='/password' method='post'>
+        <input type='hidden' name='_method' value='PATCH'>
+        请输入用户名<input id='change_username' name='username' type='text' onblur=isNameCorrect()><span id='change_tip'></span><br>
+        请输入现在使用的密码<input id='change_oldPassword' name='oldPassword' type='text' onblur=isPwdCorrect()><span id='change_tip1'></span><br>
+        请输入新密码<input id='change_first' name='newPassword_first' type='password'><br>
+        请再次输入新密码<input id='change_second' name='newPassword_twice' type='password' onblur=isSame()><span id='change_tip2'></span><br>
+        <input id='change_btn' type='hidden'>
+    </form>
+</div>
+<script src="js/jquery.js"></script>
+<script src="js/login.js"></script>
+</body>
+</html>

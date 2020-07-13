@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="shortcut icon" href="#">
+</head>
+<body>
+<h1 th:text="'欢迎用户'+${username}"></h1>
+<h2 th:text="'您的余额剩余：'+${money}"></h2>
+<a href="/logout">退出</a>
+<hr>
+<form th:action="@{/moneyUp}" th:method="post">
+    <input type="hidden" name="_method" value="PATCH">
+    <input type="hidden" th:name="username" th:value="${username}">
+    <button style="background-color: white" type="submit">充值一下~</button>
+</form>
+<hr>
+<a th:href="@{/goods}">购物去！</a>
+<hr>
+<a th:href="@{/order/username/}+${username}">我的订单</a>
+<hr>
+<a th:href="@{/kills}">今日秒杀！</a>
+<hr>
+</body>
+</html>

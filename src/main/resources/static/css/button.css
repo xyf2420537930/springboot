@@ -1,0 +1,15 @@
+.btn_buy{
+    background-color: limegreen;
+}
+
+.btn_delete{
+    background-color: red;
+}
+
+.btn_update{
+    background-color: yellow;
+}
+
+button{
+    border-radius: 5px;
+}

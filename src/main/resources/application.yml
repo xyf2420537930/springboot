@@ -1,0 +1,73 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/shopping?useSSL=false&serverTimezone=UTC
+    username: root
+    password: xyj990526
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 5
+    # 最大连接池个数
+    maxActive: 20
+    # 配置获取连接等待超时的时间，单位毫秒，缺省启用公平锁，并发效率会有所下降
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    # 用来检测连接是否有效的sql，要求是一个查询语句。
+    # 如果validationQuery为null，testOnBorrow、testOnReturn、testWhileIdle都不会起作用
+    validationQuery: SELECT 1 FROM DUAL
+    # 建议配置为true，不影响性能，并且保证安全性。
+    # 申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。
+    testWhileIdle: true
+    # 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+    testOnBorrow: false
+    # 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+    testOnReturn: false
+    # 打开PSCache，并且指定每个连接上PSCache的大小
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    # 通过别名的方式配置扩展插件，多个英文逗号分隔，常用的插件有：
+    # 监控统计用的filter:stat
+    # 日志用的filter:log4j
+    # 防御sql注入的filter:wall
+    filters: stat
+    # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    # 合并多个DruidDataSource的监控数据
+    useGlobalDataSourceStat: true
+
+
+
+#kafka配置
+  kafka:
+    bootstrap-servers: 192.168.88.131:9092
+
+    producer:
+      # 发生错误后，消息重发的次数。
+      retries: 0
+      #当有多个消息需要被发送到同一个分区时，生产者会把它们放在同一个批次里。该参数指定了一个批次可以使用的内存大小，按照字节数计算。
+      batch-size: 16384
+      # 设置生产者内存缓冲区的大小。
+      buffer-memory: 33554432
+      # 键的序列化方式
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # 值的序列化方式
+      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+
+    consumer:
+      group-id: fei
+      # 自动提交的时间间隔 在spring boot 2.X 版本中这里采用的是值的类型为Duration 需要符合特定的格式，如1S,1M,2H,5D
+      auto-commit-interval: 1S
+      # 该属性指定了消费者在读取一个没有偏移量的分区或者偏移量无效的情况下该作何处理：
+      # latest（默认值）在偏移量无效的情况下，消费者将从最新的记录开始读取数据（在消费者启动之后生成的记录）
+      # earliest ：在偏移量无效的情况下，消费者将从起始位置读取分区的记录
+      auto-offset-reset: earliest
+      # 是否自动提交偏移量，默认值是true,为了避免出现重复数据和数据丢失，可以把它设置为false,然后手动提交偏移量
+      enable-auto-commit: false
+      #键的反序列化方式
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      # 值的反序列化方式
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+
+

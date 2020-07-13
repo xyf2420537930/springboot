@@ -1,0 +1,15 @@
+table{
+    border: black;
+    border-spacing: 2px;
+    border-collapse: separate;
+}
+
+.title{
+    color: red;
+}
+
+.main{
+    color: green;
+}
+
+

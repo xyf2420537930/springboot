@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/changePrice.css">
+    <link rel="shortcut icon" href="#">
+</head>
+<body>
+<div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>COUNT</th>
+            <th>COST</th>
+        </tr>
+        <tr th:each="good : ${goods}">
+            <td th:text="${good.id}"></td>
+            <td th:text="${good.name}"></td>
+            <td th:text="${good.count}"></td>
+            <td th:text="${good.cost}"></td>
+            <td>
+                <form th:action="@{/kill}" th:method="post">
+                    <input type="hidden" name="_method" value="PATCH">
+                    <input type="hidden" name="id" th:value="${good.id}">
+                    <button class="btn_buy" type="submit">设置秒杀</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/good}" th:method="post">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="id" th:value="${good.id}">
+                    <button class="btn_delete" type="submit">删除</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+<button class="btn_update" onclick=changeP()>修改</button>
+<button class="btn_update" onclick=changeI()>添加</button>
+<div class="changePrice">
+    <form th:action="@{/good}" th:method="post">
+        <input type="hidden" name="_method" value="PATCH">
+        请输入商品的ID<br><input type="text" name="id"><br>
+        请输入更改的Price<br><input type="text" name="price"><br>
+        <button type="submit">提交</button>
+    </form>
+</div>
+
+<div class="insert">
+    <form th:action="@{/good}" th:method="post">
+        请输入商品的ID<br><input type="text" name="id"><br>
+        请输入商品的NAME<br><input type="text" name="name"><br>
+        请输入商品的COUNT<br><input type="text" name="count"><br>
+        请输入更改的COST<br><input type="text" name="cost"><br>
+        <button type="submit">提交</button>
+    </form>
+</div>
+<script src="js/jquery.js"></script>
+<script src="js/change.js"></script>
+</body>
+</html>
